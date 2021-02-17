@@ -8,7 +8,7 @@
 
 typedef struct pilha_generica Pilha;
 
-Pilha* cria_pilha();
+Pilha *cria_pilha();
 void push_operando(int operando, Pilha *p);
 void push_operador(char operador, Pilha *p);
 void *pop(Pilha *p);

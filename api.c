@@ -52,7 +52,7 @@ void imprime_pilha_double(Pilha *pilha)
     printf("Pilha int:\n");
     for (int i = 0; i < pilha->topo; i++)
     {
-    
+
         int *temp = pilha->item[i];
         printf("%d ", *temp);
     }

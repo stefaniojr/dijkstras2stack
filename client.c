@@ -11,10 +11,8 @@ int main()
     // push_operador('+', p2);
     // push_operador('-', p2);
 
-
     imprime_pilha_double(p1);
     // imprime_pilha_char(p2);
-
 
     return 0;
 }
