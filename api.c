@@ -2,7 +2,7 @@
 
 struct pilha_generica
 {
-    void *item[N];
+    void *item[100];
     int topo;
 };
 
@@ -14,25 +14,29 @@ Pilha *cria_pilha()
     return p;
 }
 
-void push_operando(int operando, Pilha *p)
+void push_operando(double operando, Pilha *p)
 {
     if (p->topo == 100)
         return;
 
-    p->item[p->topo] = &operando;
+    void *a = malloc(sizeof(double));
+    *(double *)a = operando;
+    p->item[p->topo] = a;
 
     p->topo++;
 }
 
-// void push_operador(char operador, Pilha *p)
-// {
-//     if (p->topo == 100)
-//         return;
+void push_operador(char operador, Pilha *p)
+{
+    if (p->topo == 100)
+        return;
 
-//     p->item[p->topo] = (char*)operador;
+    void *a = malloc(sizeof(char));
+    *(char *)a = operador;
+    p->item[p->topo] = a;
 
-//     p->topo++;
-// }
+    p->topo++;
+}
 
 void *pop(Pilha *p)
 {
@@ -40,30 +44,28 @@ void *pop(Pilha *p)
         return NULL;
 
     void *a = p->item[p->topo - 1];
-
+    free(a);
     p->topo--;
+}
 
-    return a;
+void libera_pilha(Pilha *p)
+{
+    while (p->topo != 0)
+        pop(p);
 }
 
 void imprime_pilha_double(Pilha *pilha)
 {
 
-    printf("Pilha int:\n");
     for (int i = 0; i < pilha->topo; i++)
-    {
-
-        int *temp = pilha->item[i];
-        printf("%d ", *temp);
-    }
-
+        printf("%lf ", *(double *)pilha->item[i]);
     printf("\n");
 }
 
-// void imprime_pilha_char(Pilha *pilha)
-// {
-//     printf("Pilha char:/n");
-//     for (int i = 0; i < pilha->topo; i++)
-//         printf("%c ", *(char*)pilha->item[i]);
-//     printf("/n");
-// }
+void imprime_pilha_char(Pilha *pilha)
+{
+    printf("Pilha char:\n");
+    for (int i = 0; i < pilha->topo; i++)
+        printf("%c ", *(char *)pilha->item[i]);
+    printf("\n");
+}
